@@ -12,9 +12,6 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // protected $middleware = [
-        //     \Mtownsend\RequestXml\Middleware\XmlRequest::class,
-        // ];
         $middleware->alias([
             'handleUserRequest' => '\App\Http\Middleware\HandleUserRequest::class',
         ]);

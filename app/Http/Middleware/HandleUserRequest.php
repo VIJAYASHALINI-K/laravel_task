@@ -23,7 +23,6 @@ class HandleUserRequest
     public function handle(Request $request, Closure $next): Response
     {
         $userPosted= XmlToArray::convert($request->getContent());
-        // Log::debug($userPosted);
         return $next($userPosted);
        
     }

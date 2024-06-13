@@ -52,30 +52,30 @@ class UserController extends Controller
         }
         
     }
-    // public function login(Request $request){
-    //     $fields=$request->validate([
-    //         'email' => 'required|string',
-    //         'password' => 'required|string'
-    //     ]);
-    //     $user=User::where(
-    //         'email',$fields['email'])->first();
-    //    if(!$user || !Hash::check($fields['password'],$user->password)){
-    //         return response([
-    //             'message'=>"Bad credentials"
-    //         ],401);
-    //    }
-    //     $token=$user->createToken('myapptoken')->plainTextToken;
-    //     $response=[
-    //         'user id' => $user['id'],
-    //         'token'=> $token
-    //     ];
-    //     return response($response,201);
-    // }
-    // public function logout(Request $request){
-    //     auth()->user()->tokens()->delete();
-    //     return[
-    //         'message' =>'Logged out'
-    //     ];
-    // }
+    public function login(Request $request){
+        $fields=$request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string'
+        ]);
+        $user=User::where(
+            'email',$fields['email'])->first();
+       if(!$user || !Hash::check($fields['password'],$user->password)){
+            return response([
+                'message'=>"Bad credentials"
+            ],401);
+       }
+        $token=$user->createToken('myapptoken')->plainTextToken;
+        $response=[
+            'user id' => $user['id'],
+            'token'=> $token
+        ];
+        return response($response,201);
+    }
+    public function logout(Request $request){
+        auth()->user()->tokens()->delete();
+        return[
+            'message' =>'Logged out'
+        ];
+    }
     
 }
